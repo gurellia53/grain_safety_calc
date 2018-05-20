@@ -1,7 +1,7 @@
 #include "gsc.h"
 #include <math.h>
 
-double gsc(gsc_vars_t work)
+double gsc(struct gsc_vars_t work)
 {
     // output
     double F_extraction = 0;

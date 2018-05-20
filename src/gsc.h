@@ -8,7 +8,7 @@ extern "C" {
 #include "G:\grain_safety_calc\src\gsc_secret.h"
 
 // typedef of input variable structure
-typedef struct
+struct gsc_vars_t
 {
     double W;
     double w;
@@ -21,10 +21,10 @@ typedef struct
     double y1;
     double y2;
     double y3;
-} gsc_vars_t;
+};
 
 // public function to calculate the 
-extern double gsc(gsc_vars_t work);
+extern double gsc(struct gsc_vars_t work);
 
 #ifdef __cplusplus
 }

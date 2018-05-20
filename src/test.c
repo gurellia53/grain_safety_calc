@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 // test values
-gsc_vars_t test_0_vals = 
+struct gsc_vars_t test_0_vals = 
 {
     1,
     1,
