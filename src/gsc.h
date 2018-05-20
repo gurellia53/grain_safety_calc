@@ -23,8 +23,32 @@ struct gsc_vars_t
     double y3;
 };
 
-// public function to calculate the 
-extern double gsc(struct gsc_vars_t work);
+
+// calculate the F_extraction
+extern double gscCalculate(struct gsc_vars_t* work);
+
+// set input structure
+extern void gscSetInputs(struct gsc_vars_t* work, double i_W, double i_w, double i_R, double i_A_tsa, double i_S, double i_k, double i_u, double i_o, double i_y1, double i_y2, double i_y3);
+
+// clear input structure
+extern void gscClearInputs(struct gsc_vars_t* work);
+
+
+// the default object can be used if re-entrance isn't necessary
+
+// default object
+extern struct gsc_vars_t dflt_struct;
+
+// set default input structure
+extern void gscSetDfltInputs(double i_W, double i_w, double i_R, double i_A_tsa, double i_S, double i_k, double i_u, double i_o, double i_y1, double i_y2, double i_y3);
+
+// clear default input structure
+extern void gscClearDfltInputs();
+
+// calculate the F_extraction for the default structure
+extern double gscDfltCalculate();
+
+
 
 #ifdef __cplusplus
 }
