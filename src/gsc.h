@@ -1,4 +1,11 @@
-#include "gsc_secret.h"
+#ifndef _GSC_H_
+#define _GSC_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "G:\grain_safety_calc\src\gsc_secret.h"
 
 // typedef of input variable structure
 typedef struct
@@ -18,3 +25,9 @@ typedef struct
 
 // public function to calculate the 
 extern double gsc(gsc_vars_t work);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* _GSC_H_ */ 
