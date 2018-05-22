@@ -1,10 +1,30 @@
 #include "gsc.h"
 #include <math.h>
+// default object
 
+
+// utilities
+static struct gsc_vars_t* check_dflt_workspace(struct gsc_vars_t** work)
+{
+    if(0 == *work)
+    {
+        // use the default structure
+        *work = &dflt_struct;
+    }
+}
+
+
+//******************************************************************************
+// Base Functionality **********************************************************
+//******************************************************************************
+// This is the basic functionality of this feature. Everything else is a wrapper.
 
 // calculate the F_extraction
 double gscCalculate(struct gsc_vars_t* work)
 {
+    // check to use the default structure
+    check_dflt_workspace(&work);
+    
     // output
     double F_extraction = 0;
     
@@ -29,11 +49,8 @@ double gscCalculate(struct gsc_vars_t* work)
 // set input structure
 void gscSetInputs(struct gsc_vars_t* work, double i_W, double i_w, double i_R, double i_A_tsa, double i_S, double i_k, double i_u, double i_o, double i_y1, double i_y2, double i_y3)
 {
-    if(0 == work)
-    {
-        // use the default structure
-        work = &dflt_struct;
-    }
+    // check to use the default structure
+    check_dflt_workspace(&work);
     
     work->W = i_W;
     work->w = i_w;
@@ -51,13 +68,19 @@ void gscSetInputs(struct gsc_vars_t* work, double i_W, double i_w, double i_R, d
 // clear input structure
 void gscClearInputs(struct gsc_vars_t* work)
 {
+    // check to use the default structure
+    check_dflt_workspace(&work);
+    
+    // set inputs to 0
     gscSetInputs(work, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 }
 
 
-// the default object can be used if re-entrance isn't necessary
+//******************************************************************************
+// Default Object **************************************************************
+//******************************************************************************
+// the default object interfaces can be used if re-entrance or multi-instance isn't necessary
 
-// default object
 struct gsc_vars_t dflt_struct = 
 {
     1,
