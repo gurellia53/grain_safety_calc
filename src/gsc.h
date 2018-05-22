@@ -7,22 +7,40 @@ extern "C" {
 
 #include "G:\grain_safety_calc\src\gsc_secret.h"
 
+//******************************************************************************
+// typedefs ********************************************************************
+//******************************************************************************
+
 // typedef of input variable structure
 struct gsc_vars_t
 {
-    double W;
-    double w;
-    double R;
-    double A_tsa;
-    double S;
-    double k;
-    double u;
-    double o;
-    double y1;
-    double y2;
-    double y3;
+    double W;       //  (lb)        weight of the victim
+    double w;       //  (lbs/ft^3)  bulk weight of the granular material
+    double R;       //  (ft)        hydraulic radius of the cylinder
+    double A_tsa;   //  (ft^2)      top surface area of the victim
+    double S;       //  (ft^2)      surface area of the victim
+    double k;       //  (dl)        ratio of vertical to lateral pressure
+    double u;       //  (dl)        coefficient of friction of grain on grain
+    double o;       //  (dl)        coefficient of friction of grain on victim's surface
+    double y1;      //  (ft)        distance from top of victim head to bottom of feet
+    double y2;      //  (ft)        distance from top of victim head to surface of grain
+    double y3;      //  (ft)        distance from bottom of victim feet to top surface of grain
 };
 
+
+//******************************************************************************
+// Default Object **************************************************************
+//******************************************************************************
+// the default object is used if a NULL "work" pointer is passed into the api.
+
+// default object
+extern struct gsc_vars_t dflt_workspace;
+
+
+//******************************************************************************
+// Base Functionality **********************************************************
+//******************************************************************************
+// This is the basic functionality of this feature. Everything else is a wrapper.
 
 // calculate the F_extraction
 extern double gscCalculate(struct gsc_vars_t* work);
@@ -34,19 +52,20 @@ extern void gscSetInputs(struct gsc_vars_t* work, double i_W, double i_w, double
 extern void gscClearInputs(struct gsc_vars_t* work);
 
 
-// the default object can be used if re-entrance isn't necessary
 
-// default object
-extern struct gsc_vars_t dflt_struct;
+//******************************************************************************
+// Wrap Functionality **********************************************************
+//******************************************************************************
+// This functionality builds upon the base functionality
 
-// set default input structure
-extern void gscSetDfltInputs(double i_W, double i_w, double i_R, double i_A_tsa, double i_S, double i_k, double i_u, double i_o, double i_y1, double i_y2, double i_y3);
-
-// clear default input structure
-extern void gscClearDfltInputs();
-
-// calculate the F_extraction for the default structure
-extern double gscDfltCalculate();
+//
+//  gscWrapSetInputs_00
+//
+//  This wrapper function simply calculates y3 from the victim's height and depth below surface
+//
+//  i_h (ft) distance from top of victim head to bottom of feet
+//  i_d (ft) distance from top of victim head to surface of grain
+extern void gscSetInputs_w00(struct gsc_vars_t* work, double i_W, double i_w, double i_R, double i_A_tsa, double i_S, double i_k, double i_u, double i_o, double i_h, double i_d);
 
 
 
