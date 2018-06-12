@@ -5,7 +5,12 @@
 extern "C" {
 #endif
 
+#ifdef _WIN32
 #include "G:\grain_safety_calc\src\gsc_secret.h"
+#endif
+#ifdef __linux__
+#include "/media/andrew/1694AE9994AE7B3F/view/grain_safety_calc/src/gsc_secret.h"
+#endif
 
 //******************************************************************************
 // typedefs ********************************************************************
